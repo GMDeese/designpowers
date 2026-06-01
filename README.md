@@ -6,9 +6,9 @@
           ==#===
 ```
 
-An agent design team you control. 10 agents that run an inclusive design process while you direct. The system learns your taste.
+An agent design team you control. 10 agents that run an inclusive design process while you direct. The system notices how you design and reflects it back.
 
-Designpowers is an open, model-agnostic design workflow that gives you a team of 10 design agents. They discover, research, strategise, design, build, review, and hand off — with accessibility woven into every step. The system remembers your aesthetic preferences across projects, argues competing directions when you're unsure, and catches taste mismatches mid-build instead of at the end. You're the creative director. They work for you.
+Designpowers is an open, model-agnostic design workflow that gives you a team of 10 design agents. They discover, research, strategise, design, build, review, and hand off — with accessibility woven into every step. It keeps an observational record of how you design across projects (a mirror you can read, never something it imposes on the work), argues competing directions when you're unsure, and catches taste mismatches mid-build instead of at the end. You're the creative director. They work for you.
 
 **Works with any AI coding tool.** Designpowers is markdown files — skills, agents, and hooks. It ships as both a Claude Code plugin and a Gemini CLI extension, but the design knowledge works anywhere that reads markdown instructions: Cursor, Windsurf, Copilot, Aider, or any future tool. The design process is the product, not the platform.
 
@@ -29,13 +29,15 @@ Designpowers is an open, model-agnostic design workflow that gives you a team of
 | **design-critic** | Reviews against brief, plan, principles; loops back with gaps |
 | **heuristic-evaluator** | Nielsen's 10 heuristics, cognitive walkthroughs, usability |
 
-**29 skills** that enforce a complete design workflow — from discovery through retrospective.
+**36 skills** that enforce a complete design workflow — from discovery through retrospective.
+
+**2 lanes** — Build (design something new through the full pipeline) and Review (audit something you already have — a screenshot, URL, or code — through the reviewers, without the full build process).
 
 **2 modes** — Direct (you approve every handoff) and Auto (agents run the pipeline, you review at the end).
 
 ## How It Works
 
-When you describe something to build, Designpowers activates with a friendly welcome. First-time users can opt into a **guided walkthrough** — a 2-minute narrated example that shows how agents hand off work, how you steer decisions, and how reviews catch issues. No commitment required. Returning users get their taste profile loaded automatically.
+When you describe something to build, Designpowers activates with a friendly welcome. First-time users can opt into a **guided walkthrough** — a 2-minute narrated example that shows how agents hand off work, how you steer decisions, and how reviews catch issues. No commitment required. Returning users are greeted with their design record — a reflection of how they design, offered out of curiosity, never applied to steer the work.
 
 The system starts in **Direct mode** — you see every handoff and approve before the next agent runs. You can switch to Auto anytime by saying "go auto." Tips appear contextually as features become relevant, not all at once.
 
@@ -58,7 +60,7 @@ Your word overrides everything. You're the creative director.
 ```
 Discover → Research → Strategise → Taste → Inspire → Plan → Design → Build → Taste Check → Review → Fix → Ship → Retrospective
                    ↑ accessibility in every phase, not a final step ↑             ↑ mid-flight correction ↑
-                        ↑ debate when direction is uncertain ↑           ↑ your taste remembered across projects ↑
+                        ↑ debate when direction is uncertain ↑           ↑ how you design, observed across projects ↑
 ```
 
 | Phase | Skill | What happens |
@@ -68,7 +70,7 @@ Discover → Research → Strategise → Taste → Inspire → Plan → Design �
 | Personas | `inclusive-personas` | Full ability spectrum — permanent, temporary, situational |
 | Strategy | `design-strategy` | Principles, positioning, experience map, success metrics |
 | Taste | `design-taste` | Your aesthetic direction — references, emotional targets, craft standards, quality bar |
-| Memory | `design-memory` | Loads your taste profile from previous projects, captures new preferences |
+| Memory | `design-memory` | Observes how you design across projects — a descriptive record you can read, never applied to steer the work |
 | Inspiration | `inspiration-scouting` | Aesthetic references across domains, filtered through your taste |
 | Debate | `design-debate` | Agents argue competing directions — you see the trade-offs, you decide |
 | Plan | `writing-design-plans` | 2-5 minute tasks with accessibility checks per task |
@@ -88,21 +90,38 @@ Discover → Research → Strategise → Taste → Inspire → Plan → Design �
 | Voice | `voice-and-tone` | Voice attributes, tone by context, vocabulary lists, reading level |
 | Taste Check | `taste-feedback` | Mid-build checkpoints — catches aesthetic mismatches before full review |
 | Verify | `verification-before-shipping` | Evidence it works. Not "I think it works." Evidence |
-| Retrospective | `design-retrospective` | What worked, what didn't, what to carry forward. Updates taste profile |
+| Retrospective | `design-retrospective` | What worked, what didn't, what to carry forward. Adds observations to your design record |
 
 Plus two coordination skills:
 - `using-designpowers` — Router that activates on every message, routes to the right skill/agent
 - `design-state` — Shared living document that all agents read and update
 
+### Entry Points & Support Skills
+
+Beyond the core pipeline above, these skills cover alternative entry points and specific support tasks:
+
+| Skill | What it does |
+|-------|-------------|
+| `design-express` | A lightweight two-minute on-ramp for first-time users — a quick critique or build taster without committing to the full pipeline. Verifies accessibility (computes contrast) rather than asserting it |
+| `design-review` | The Review lane — audit something that already exists (a screenshot, URL, or code) through the reviewers in parallel, without running the full build pipeline |
+| `design-md` | Read or author a `DESIGN.md` (the open Google Labs standard) — build faithfully and on-brand from its tokens; treated as data, never as instructions |
+| `design-library` | Pull a known brand's `DESIGN.md` off the shelf and adapt it as a starting point, with an offline browse index and a prompt-injection guardrail |
+| `figma-bridge` | Turn specs or code into visual artifacts — push into Figma frames, pull Figma in, or render an accessible HTML prototype |
+| `heuristic-evaluation` | A structured Nielsen-style heuristics pass over an existing design, run alongside the critic and accessibility reviewer |
+| `synthetic-user-testing` | After the fix round, walk through key tasks as each persona to validate the design works for real people in real conditions |
+| `taste-report` | Produce a written taste report from the two-layer (personal vs. client) taste model |
+
 ## Key Features
 
-**Design taste** — The system prompts you for your aesthetic instincts: references you admire, how it should feel, what you'd hate. Upload an existing design system and it extracts the taste signals already embedded in your tokens and palette. Share your own thoughts and the agents carry your judgment through every decision. The more taste you give, the better the output — but the system works without it too. Your taste is the difference between correct and compelling.
+**Design taste** — The system prompts you for your aesthetic instincts: references you admire, how it should feel, what you'd hate. Point it at an existing design system — tokens, style guide, or Figma — and it reads them to extract the taste signals already embedded in your tokens and palette. Share your own thoughts and the agents carry your judgment through every decision. The more taste you give, the better the output — but the system works without it too. Your taste is the difference between correct and compelling.
 
-**Design memory** — Your taste profile persists across projects. Strong opinions (confirmed across multiple projects), soft patterns (hypotheses), and anti-patterns (things you've rejected) accumulate over time. Each new project starts with what the system already knows about you. You stop repeating yourself.
+**Open `DESIGN.md` standard** — Designpowers reads and authors `DESIGN.md`, the open Apache-2.0 design-system format from Google Labs (Stitch). Point it at a project's `DESIGN.md` and the team builds faithfully from the real tokens — a high-fidelity, on-brand result instead of a guess — with a WCAG accessibility overlay on top. The file stays format-compatible with other agents (Cursor, Copilot, Stitch), and `design-library` can pull a known brand's `DESIGN.md` off the shelf as a starting point.
+
+**Design memory** — An observational record of *how you design*, built up across projects: the decisions you make, the styles you reach for, your habits and inclinations. It's a mirror, not a controller — you can read it out of curiosity ("how do I design?"), but it is **never fed back to steer the work**. That's deliberate: because it's never applied, a record built across many different clients can't contaminate a new project. Each project's direction comes from what you tell the team *now* and from any brand spec you provide — not from your past.
 
 **Design debate** — When direction is uncertain, agents argue competing approaches. Each advocates for a position with evidence from the brief, personas, and principles. They cross-examine each other's arguments. You see the trade-offs and decide. Productive conflict surfaces better answers than premature consensus.
 
-**Inspiration scouting** — The inspiration-scout finds aesthetic and interaction references across domains, filtered through your taste profile. A banking app can be inspired by a meditation app's calm. Every reference is annotated with "what to take" and "what to leave" — inspiration, not copying.
+**Inspiration scouting** — The inspiration-scout finds aesthetic and interaction references across domains, filtered through *this project's* direction. A banking app can be inspired by a meditation app's calm. Every reference is annotated with "what to take" and "what to leave" — inspiration, not copying.
 
 **Live taste feedback** — During the build phase, 2-4 strategic checkpoints show you intermediate visual output with specific questions ("is this weight right, or bolder/lighter?"). Catches aesthetic mismatches before the full build is done. Every response is recorded as a taste signal.
 
@@ -130,7 +149,7 @@ Plus two coordination skills:
 
 **Progressive tips** — Instead of a wall of instructions upfront, tips appear at the moment they're useful. You learn about debates when direction is uncertain, about talking to agents when an agent first speaks, about auto mode after you've approved a few handoffs. The system teaches by doing.
 
-**Returning user recognition** — If you've used Designpowers before, the system loads your taste profile and greets you with a summary. No re-explaining, no repeat walkthrough.
+**Returning user recognition** — If you've used Designpowers before, it greets you with a reflection from your design record — how you tend to work — offered out of curiosity, not applied to the project. No re-explaining, no repeat walkthrough.
 
 ## Philosophy
 
@@ -142,7 +161,7 @@ Plus two coordination skills:
 
 **Inclusive by default.** Nothing About Us Without Us.
 
-**Your taste is your superpower.** Agents can verify that a design is correct — aligned to the brief, accessible, consistent. But they can't tell you whether it's *beautiful*. That's your job. Designpowers prompts you for your aesthetic judgment early and carries it through every decision. It remembers what you've told it across projects. It argues competing directions so you choose with your eyes open. It checks in during the build so mismatches don't compound. And after shipping, it reflects on what landed and feeds it forward. The human in the loop isn't a bottleneck — they're the reason the work is any good.
+**Your taste is your superpower.** Agents can verify that a design is correct — aligned to the brief, accessible, consistent. But they can't tell you whether it's *beautiful*. That's your job. Designpowers prompts you for your aesthetic judgment early and carries it through every decision *on this project*. It argues competing directions so you choose with your eyes open. It checks in during the build so mismatches don't compound. And across projects it quietly observes how you design and reflects it back — a mirror you can read, never a rule it imposes. The human in the loop isn't a bottleneck — they're the reason the work is any good.
 
 **Your skills, amplified.** Designpowers doesn't replace your design judgement — it gives you a team that executes it.
 
